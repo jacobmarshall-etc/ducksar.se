@@ -15,7 +15,7 @@
             background-color: #0288D1;
             cursor: pointer;
         }
-        .container {
+        h1 {
             display: table-cell;
             vertical-align: middle;
             text-align: center;
@@ -26,112 +26,27 @@
             padding-right: .5em;
             font-weight: normal;
             color: #fff;
-        }
-        .quote {
-            position: absolute;
-            transform: translate3d(-50%, -50%, 0);
-            transition: opacity .4s ease-in-out,
-                        margin-top .4s ease-in-out;
-        }
-        .quote {
             opacity: 0;
-            margin-top: -50px;
+            transition: opacity .6s ease-in-out;
+            will-change: opacity;
         }
-        .quote.in {
+        h1.show {
             opacity: 1;
-            margin-top: 0;
-        }
-        .quote.out {
-            opacity: 0;
-            margin-top: 50px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <span class="quote">That's what they call me.</span>
-        <span class="quote">It's not the name of a haircut.</span>
-        <span class="quote">It's my nickname.</span>
-        <span class="quote">No joke.</span>
-        <span class="quote">I work with some odd people.</span>
-        <span class="quote">Weirdo's right?</span>
-        <span class="quote">I think so.</span>
-        <span class="quote">Do I mind?</span>
-        <span class="quote">Not really, it's kinda funny.</span>
-        <span class="quote">But... Why do they do this?</span>
-        <span class="quote">I hear you asking.</span>
-        <span class="quote">No clue. Again, weirdo's...</span>
-        <span class="quote">What are you still doing here?</span>
-        <span class="quote">This page literally doesn't do anything else.</span>
-        <span class="quote">And by now I assume you've realised this.</span>
-        <span class="quote">Bye.</span>
-        <span class="quote">Bye..</span>
-        <span class="quote">Bye...</span>
-        <span class="quote">Bye?</span>
-        <span class="quote">Not quite.</span>
-        <span class="quote">I'm here to stay.</span>
-        <span class="quote">Jokes, this is getting boring.</span>
-        <span class="quote"></span>
-    </div>
+    <h1>That's what they call me.</h1>
 
     <script>
-        var currentQuote = -1,
-            currentElement = null,
-            quoteElements = Array.prototype.slice.call(document.querySelectorAll('.quote')),
-            maxQuotes = quoteElements.length - 1;
-
-        var onTransitionEnd = (function () {
-            var eventName,
-                eventMap = {
-                    WebkitTransition: 'webkitTransitionEnd',
-                    MozTransition: 'transitionend',
-                    OTransition: 'oTransitionEnd',
-                    transition: 'transitionend'
-                },
-                testElement = document.createElement('test');
-
-            Object.keys(eventMap).forEach(function (name) {
-                if (testElement.style[name] !== undefined) {
-                    eventName = eventMap[name];
-                }
-            });
-
-            return eventName;
-        })();
-
-        function tick () {
-            var incrementQuote = currentQuote + 1;
-            currentQuote = (incrementQuote > maxQuotes) ? 0 : incrementQuote;
-
-            var previousElement = currentElement;
-            currentElement = quoteElements[currentQuote];
-
-            visibility(previousElement, false);
-            visibility(currentElement, true);
-        }
-
-        function visibility (element, visible) {
-            if ( ! element) return;
-
-            var classList = element.classList;
-
-            classList.add(visible ? 'in' : 'out');
-            classList.remove(visible ? 'out' : 'in');
-
-            if (visible) return;
-
-            element.addEventListener(onTransitionEnd, function wait () {
-                classList.remove(visible ? 'in' : 'out');
-                element.removeEventListener(onTransitionEnd, wait, false);
-            }, false);
-        }
-
         document.addEventListener('DOMContentLoaded', function () {
             setTimeout(function () {
-                tick();
+                document.querySelector('h1').classList.add('show');
             }, 1);
 
-            document.body.addEventListener('click', tick, false);
+            document.body.addEventListener('click', function () {
+                location.href = 'http://twitter.com/heyimjacooob';
+            }, false);
         }, false);
     </script>
 </body>
