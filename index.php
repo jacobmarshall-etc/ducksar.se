@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Ducks Arse</title>
 
-    <meta name="example" content="1">
+    <meta name="x-hostname" content="<?= gethostname() ?>">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat">
     <style>
         body {
